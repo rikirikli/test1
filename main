@@ -18,53 +18,45 @@ async def on_ready():
 
 @bot.command()
 async def hello(ctx):
-    await ctx.send(f'Привет! Я бот {bot.user}!')
+    await ctx.send(f'Привет! Я бот {bot.user}, который поможет тебе с сортировкой мусора!')
 
 @bot.command()
-async def heh(ctx, count_heh = 5):
-    await ctx.send("he" * count_heh)
+async def helpme(ctx):
+    await ctx.send('Вот какие команды ты можешь использовать 1. hello  2. steclo    3. предмет_podelka   4. metal   5. helpme  6. reason')
 
 @bot.command()
-async def add(ctx, left: int, right: int):
-    """Adds two numbers together."""
-    await ctx.send(left + right)
+async def reason(ctx):
+    await ctx.send('Раздельный сбор и переработка позволяют отказаться от мусоросжигания и пиролиза, которые отравляют природу и людей, и не использовать эти опасные технологии.')
+
+    
+@bot.command()
+async def steclo(ctx):
+    await ctx.send('в контейнеры для сбора стекла можно выбрасывать только стеклянную тару — бутылки и банки, если стекло разбитое, то завернуть в ткань и в пакет')
 
 @bot.command()
-async def joined(ctx, member: discord.Member):
-    """Says when a member joined."""
-    await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
-
-@bot.command()
-async def mem(ctx):
-    img_name = random.choice(os.listdir('images'))
+async def steclo_podelka(ctx):
+    img_name = random.choice(os.listdir('images/steclo'))
     # А вот так можно подставить имя файла из переменной!
-    with open(f'images/{img_name}', 'rb') as f:
+    with open(f'images/steclo/{img_name}', 'rb') as f:
         picture = discord.File(f)
    # Можем передавать файл как параметр!
     await ctx.send(file=picture)
 
-
-def get_duck_image_url():    
-    url = 'https://random-d.uk/api/random'
-    res = requests.get(url)
-    data = res.json()
-    return data['url']
-
-
-@bot.command('duck')
-async def duck(ctx):
-    '''По команде duck вызывает функцию get_duck_image_url'''
-    image_url = get_duck_image_url()
-    await ctx.send(image_url)
-
+@bot.command()
+async def metal(ctx):
+    await ctx.send('В первую очередь необходимо рассортировать лом. Отделите черные металлы от цветных. К черным металлам относится сталь и чугун, к цветным – алюминий, медь, цинк, бронза, латунь. Также следует отделить нержавеющую сталь от обычной углеродистой – стоимость нержавейки намного выше.')
 
 @bot.command()
-async def animals(ctx):
-    with open('images/mem1.jpg', 'rb') as f:
+async def metal_podelka(ctx):
+    img_name = random.choice(os.listdir('images/metal'))
+    # А вот так можно подставить имя файла из переменной!
+    with open(f'images/metal/{img_name}', 'rb') as f:
         picture = discord.File(f)
+   # Можем передавать файл как параметр!
     await ctx.send(file=picture)
 
 
 
 
 bot.run("токен")
+
